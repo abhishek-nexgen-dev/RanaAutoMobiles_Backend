@@ -4,8 +4,8 @@ import { ISuperAdmin } from "./SuperAdmin.type";
 
 const SuperAdminSchema: Schema = new Schema(
   {
-    name: { type: String, required: true },
-    email: { type: String, required: true, unique: true, lowercase: true },
+    name: { type: String, required: true},
+    email: { type: String, required: true, unique: true},
     password: { type: String, required: true },
     role: { type: String, default: "SuperAdmin" },
   },

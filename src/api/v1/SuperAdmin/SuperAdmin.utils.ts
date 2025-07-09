@@ -5,7 +5,7 @@ class SuperAdminUtils {
         return process.env.SuperAdmin_Name || "DefaultSuperAdmin";
     }
     public async FindSuperAdminByEmail(SuperAdmin_Email: string): Promise<any> {
-        await SuperAdminModel.findOne({ email: SuperAdmin_Email });
+       return await SuperAdminModel.findOne({ email: SuperAdmin_Email });
      }
 }
 

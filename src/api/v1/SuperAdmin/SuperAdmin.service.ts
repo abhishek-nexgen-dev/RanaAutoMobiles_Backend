@@ -13,6 +13,7 @@ class SuperAdminService {
         SuperAdmin_Email
       );
 
+
       if (existingSuperAdmin) {
         throw new Error(SuperAdminConstant.ALREADY_EXISTS);
       }
@@ -28,9 +29,9 @@ class SuperAdminService {
         throw new Error(SuperAdminConstant.CREATED_FAILED);
       }
 
-      console.log(SuperAdminConstant.CREATED_SUCCESSFULLY);
+      return superAdmin;
     } catch (error: any) {
-        throw new Error(error.message);
+        throw new Error(error.message || SuperAdminConstant.INTERNAL_SERVER_ERROR);
      
     }
   }

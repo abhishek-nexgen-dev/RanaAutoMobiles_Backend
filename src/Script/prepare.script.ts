@@ -2,19 +2,24 @@ import { config } from "dotenv";
 config();
 
 import mongoose from "mongoose";
-import SuperAdminService from "../api/v1/SuperAdmin/SuperAdmin.service";
 import { envConstant } from "../constant/env.constant";
+import userService from "../api/v1/user/user.service";
 
 // Connect to MongoDB
 const MONGO_URI = envConstant.MONGO_URI;
 
 async function main() {
   try {
+
     await mongoose.connect(MONGO_URI);
     console.log("Connected to MongoDB");
 
     // Create Super Admin (no httpServer needed for script)
-    await SuperAdminService.createSuperAdmin();
+    let Created_SuperAdmin =  await userService.createSuperAdmin();
+
+    if(!Created_SuperAdmin){
+      throw new Error("Failed to create Super Admin");
+    }
 
     console.log("Super Admin creation script completed.");
     process.exit(0);

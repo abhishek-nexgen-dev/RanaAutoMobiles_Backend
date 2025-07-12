@@ -11,6 +11,9 @@ export let envConstant: EnvTypes = {
   SuperAdmin_Password: process.env.SuperAdmin_Password || '',
   MONGO_URI: process.env.MONGO_URI || '',
   DB_NAME: process.env.DB_NAME || '',
+  publicKey: process.env.publicKey || '',
+  privateKey: process.env.privateKey || '',
+
 };
 
 console.log('e', envConstant)

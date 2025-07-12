@@ -5,5 +5,8 @@ export interface EnvTypes {
     SuperAdmin_Password: string;
     MONGO_URI: string;
     DB_NAME: string;
+    publicKey?: string;
+    privateKey?: string;
+
 
 }

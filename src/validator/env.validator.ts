@@ -1,5 +1,4 @@
 import Joi from "joi";
-import { httpServer } from "../config/socket/socket";
 
 export const envSchema = Joi.object({
   PORT: Joi.number().default(4000),
@@ -8,6 +7,7 @@ export const envSchema = Joi.object({
   SuperAdmin_Password : Joi.string().min(6).required(),
   MONGO_URI: Joi.string().uri().required(),
   DB_NAME: Joi.string().required(),
+
 //   NODE_ENV: Joi.string()
 //     .valid("development", "production", "test")
 //     .default("development"),

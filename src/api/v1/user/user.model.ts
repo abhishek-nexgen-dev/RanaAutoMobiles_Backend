@@ -1,5 +1,7 @@
 import mongoose, { Schema, Document, Types } from "mongoose";
+import argon2 from "argon2";
 import { IUser } from "./user.type";
+
 
 
 const UserSchema: Schema = new Schema(
@@ -11,6 +13,18 @@ const UserSchema: Schema = new Schema(
   },
   { timestamps: true }
 );
+
+// Hash password before saving using 
+UserSchema.pre<IUser>("save", async function (next) {
+
+    try {
+      this.password = await argon2.hash(this.password); 
+    } catch (error: any) {
+      return next(error); 
+    }
+  
+  next();
+});
 
 
 

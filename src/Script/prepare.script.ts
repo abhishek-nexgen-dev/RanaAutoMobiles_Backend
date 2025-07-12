@@ -1,35 +1,38 @@
+import mongoose from "mongoose";
 import { config } from "dotenv";
+import RoleModel from "../api/v1/role/role.model";
+import UserService from "../api/v1/user/user.service";
+
 config();
 
-import mongoose from "mongoose";
-import { envConstant } from "../constant/env.constant";
-import userService from "../api/v1/user/user.service";
-
-// Connect to MongoDB
-const MONGO_URI = envConstant.MONGO_URI;
-
-async function main() {
+const Preparation = async () => {
   try {
-
-    await mongoose.connect(MONGO_URI);
+    await mongoose.connect(process.env.MONGO_URI!);
     console.log("Connected to MongoDB");
 
-    // Create Super Admin (no httpServer needed for script)
-    let Created_SuperAdmin =  await userService.createSuperAdmin();
+    // Create roles
+    const roles = [
+      { name: "SuperAdmin", description: "Has full access to the system" },
 
-    if(!Created_SuperAdmin){
-      throw new Error("Failed to create Super Admin");
+    ];
+
+    for (const role of roles) {
+      const existingRole = await RoleModel.findOne({ name: role.name });
+      if (!existingRole) {
+        await RoleModel.create(role);
+        console.log(`Role ${role.name} created`);
+      }
     }
 
-    console.log("Super Admin creation script completed.");
+ 
+    const superAdmin = await UserService.createSuperAdmin();
+   
+
     process.exit(0);
-  } catch (error: any) {
-    console.error("Error during Super Admin creation script:", error);
-    if (error && error.stack) {
-      console.error("Stack trace:", error.stack);
-    }
+  } catch (error) {
+    console.error("Error seeding database:", error);
     process.exit(1);
   }
-}
+};
 
-main();
+Preparation();

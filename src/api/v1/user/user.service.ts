@@ -1,12 +1,15 @@
 import UserModel from "./user.model";
 import RoleModel from "../role/role.model";
 import { envConstant } from "../../../constant/env.constant";
+import JwtUtils from "../../../utils/Jwt.utils";
+import { IUser } from "./user.type";
 // import httpStatus from "http-status";
 
 class UserService {
 
+
   // Create Admin
-  public async createAdmin(name: string, email: string, password: string) {
+  public async createAdmin(name: string, email: string, password: string): Promise<IUser> {
     // Check if Admin role exists
     const adminRole = await RoleModel.findOne({ name: "Admin" });
     if (!adminRole) {
@@ -55,10 +58,10 @@ class UserService {
     } catch (error : any) {
       throw new Error(`Error creating SuperAdmin: ${error.message}`);
     }
-   }
+  }
 
 
-   public async createUser(name: string, email: string, password: string, roleName: string) {
+   public async createUser(name: string, email: string, password: string, roleName: string): Promise<IUser>  {
     // Check if the role exists
     const role = await RoleModel.findOne({ name: roleName });
     if (!role) {

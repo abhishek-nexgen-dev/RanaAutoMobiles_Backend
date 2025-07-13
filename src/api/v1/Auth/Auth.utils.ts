@@ -7,8 +7,11 @@ class AuthUtils {
   }: {
     hashedPassword: string;
     plainPassword: string;
-  }): Promise<boolean> {
+  }) {
+
+  
     const isVerified = await argon2.verify(hashedPassword, plainPassword);
+
     return isVerified;
   }
 }

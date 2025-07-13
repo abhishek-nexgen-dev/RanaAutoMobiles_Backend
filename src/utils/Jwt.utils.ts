@@ -21,6 +21,7 @@ class JwtUtils {
     };
 
     return jwt.sign(payload, this.privateKey, signOptions);
+    
   }
 
 

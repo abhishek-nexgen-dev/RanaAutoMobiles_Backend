@@ -5,7 +5,7 @@ class User_Utils {
   // Utility methods for user operations can be added here
    public async findUserByEmail(email: string): Promise<IUser | null> {
    
-    return await userModel.findOne({email});
+    return await userModel.findOne({email}).select("+password");;
     
   } 
 }

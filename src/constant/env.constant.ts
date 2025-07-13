@@ -16,4 +16,3 @@ export let envConstant: EnvTypes = {
 
 };
 
-console.log('e', envConstant)

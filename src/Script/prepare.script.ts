@@ -13,6 +13,8 @@ const Preparation = async () => {
     // Create roles
     const roles = [
       { name: "SuperAdmin", description: "Has full access to the system" },
+      { name: "Admin", description: "Can manage users and settings" },
+      { name: "User", description: "Can access user features" },
 
     ];
 

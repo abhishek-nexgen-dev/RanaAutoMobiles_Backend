@@ -26,7 +26,7 @@ class UserService {
 
 
 
-    return admin;
+    return admin.set("password", undefined); // Remove password from response
   }
 
 

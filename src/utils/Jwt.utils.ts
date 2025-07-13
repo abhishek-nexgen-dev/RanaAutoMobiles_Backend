@@ -25,15 +25,12 @@ class JwtUtils {
   }
 
 
-  static verifyToken(token: string): JwtPayload | null {
-    try {
+  static verifyToken(token: string): JwtPayload {
+   
       return jwt.verify(token, this.publicKey, {
         algorithms: ["RS256"],
       }) as JwtPayload;
-    } catch (error: any) {
-      console.error("Token verification failed:", error.message);
-      return null;
-    }
+   
   }
 
 

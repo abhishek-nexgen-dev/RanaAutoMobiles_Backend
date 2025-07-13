@@ -1,8 +1,12 @@
 import express from "express";
 const app = express();
+import cookieParser from "cookie-parser";
+
 import { SuperAdminRouter } from "../api/v1/SuperAdmin/SuperAdmin.routes";
 import { AuthRoutes } from "../api/v1/Auth/Auth.routes";
 
+
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

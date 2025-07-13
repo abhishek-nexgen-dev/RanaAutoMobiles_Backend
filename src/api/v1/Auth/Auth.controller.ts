@@ -25,16 +25,17 @@ class AuthController {
   private static setTokenCookie(res: Response , token: string): void {
     res.cookie("token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production", // Use secure cookies in production
+      // secure: process.env.NODE_ENV === "production", // Use secure cookies in production
+      secure: true,          // Sends the cookie only over HTTPS
       maxAge: 24 * 60 * 60 * 1000, // 1 day
     });
 
     res.header("Authorization", `Bearer ${token}`);
   }
 
-  private static verifyToken(token: string): Promise<any> {
-    return JwtUtils.verifyToken(token);
-  }
+  // private static verifyToken(token: string): Promise<any> {
+  //   return JwtUtils.verifyToken(token);
+  // }
 
   async login(req: Request, res: Response): Promise<void> {
     try {

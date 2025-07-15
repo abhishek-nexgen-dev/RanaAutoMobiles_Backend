@@ -5,9 +5,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:dev": "ts-node-dev --exit-child --respawn --transpile-only src/Server.ts",
-    "start": "node dist/Server.js",
+    "start": "node dist/src/Server.js",
     "format": "prettier --write \"src/**/*.{ts,js,json}\"",
-    "build": "tsc",
+    "build": "tsc && mkdir -p dist/src/key && cp src/key/private.pem dist/src/key/ && cp src/key/public.pem dist/src/key/",
     "prep": "ts-node src/Script/prepare.script.ts",
     "KeyGen": "ts-node src/Script/keyGen.ts"
   },

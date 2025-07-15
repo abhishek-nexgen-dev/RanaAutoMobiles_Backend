@@ -19,6 +19,14 @@ class CategoryUtils {
     return await ProductModel.find({ category: category.name });
   }
 
+  async findAllCategories(): Promise<ICategory[]> {
+    const categories = await CategoryModel.find().populate('Products');
+    if (!categories || categories.length === 0) {
+      throw new Error('No categories found');
+    }
+    return categories;
+  }
+
  
 }
 

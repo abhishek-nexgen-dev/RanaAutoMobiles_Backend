@@ -3,9 +3,11 @@ import { envConstant } from '../constant/env.constant';
 
 export async function connectDB() {
   try {
+
     await mongoose.connect(envConstant.MONGO_URI, {
-      dbName: 'suraj',
+      dbName: envConstant.DB_NAME,
       autoIndex: true, // Automatically build indexes
+     
     });
     console.log('MongoDB connected successfully');
   } catch (error: any) {

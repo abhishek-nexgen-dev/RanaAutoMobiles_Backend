@@ -6,6 +6,7 @@ import FileUpload from '../../../utils/FileUpload'; // Utility class for file up
 import { ZodError } from 'zod';
 import StatusCode_Constant from '../../../constant/StatusCode.constant';
 import { Category_Constant } from './Category.consant';
+import CategoryUtils from './Category.utils';
 
 class Category_Controller {
  
@@ -21,27 +22,28 @@ class Category_Controller {
 
 
     }
-     let { originalname } = req.file
+   
 
       const categoryImage = await FileUpload.uploadFileInBunny(req.file);
-      console.log('Uploaded category image URL:', categoryImage);
+      console.log('categoryImage', categoryImage);
+     
+      if (!categoryImage) {
+        throw new Error('Failed to upload category image');
+      }
 
-    //   console.log('Uploaded category image URL:', categoryImage);
 
-    //   // Create the category
-    //   const newCategory = await CategoryService.createCategory({
-    //     name,
-    //     description,
-    //     categoryImage,
-    //   });
+      const newCategory = await CategoryService.createCategory({
+        name,
+        description,
+        categoryImage,
+      });
 
-    //   // Send success response
-    //   SendResponse.success(
-    //     res,
-    //     StatusCode_Constant.CREATED,
-    //     Category_Constant.CATEGORY_CREATED,
-    //     newCategory
-    //   );
+      SendResponse.success(
+        res,
+        StatusCode_Constant.CREATED,
+        Category_Constant.CATEGORY_CREATED,
+        newCategory
+      );
     } catch (error: any) {
       console.error('Error creating category:', error);
 
@@ -59,6 +61,63 @@ class Category_Controller {
       );
     }
   }
+
+
+  async find_ProductByName(req: Request, res: Response): Promise<void> {
+    try {
+      const { name } = req.params;
+
+      const category = await CategoryUtils.findProductsByCategoryName(name);
+
+      if (!category) {
+        SendResponse.error(
+          res,
+          StatusCode_Constant.NOT_FOUND,
+          Category_Constant.CATEGORY_NOT_FOUND
+        );
+        return;
+      }
+
+      SendResponse.success(
+        res,
+        StatusCode_Constant.OK,
+        Category_Constant.CATEGORY_FETCHED,
+        category
+      );
+    } catch (error: any) {
+      console.error('Error finding category by name:', error);
+      SendResponse.error(
+        res,
+        StatusCode_Constant.INTERNAL_SERVER_ERROR,
+        error.message || 'Failed to find category by name'
+      );
+    }
+  }
+
+  async findAllCategories(req: Request, res: Response): Promise<void> {
+    try {
+      const categories = await CategoryUtils.findAllCategories();
+
+      if (!categories || categories.length === 0) {
+        throw new Error(Category_Constant.CATEGORY_NOT_FOUND);
+      }
+
+      SendResponse.success(
+        res,
+        StatusCode_Constant.OK,
+        Category_Constant.CATEGORIES_FETCHED,
+        categories
+      );
+    } catch (error: any) {
+      console.error('Error finding all categories:', error);
+      SendResponse.error(
+        res,
+        StatusCode_Constant.INTERNAL_SERVER_ERROR,
+        error.message || 'Failed to find all categories'
+      );
+    }
+  }
+  
 }
 
 export default new Category_Controller();

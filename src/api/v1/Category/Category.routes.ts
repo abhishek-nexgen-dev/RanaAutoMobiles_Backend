@@ -13,4 +13,7 @@ router.post(
   CategoryController.createCategory
 );
 
+router.get('/v1/findByName/:name', CategoryController.find_ProductByName);
+router.get('/v1/findAllCategories', CategoryController.findAllCategories);
+
 export { router as Category_Router };

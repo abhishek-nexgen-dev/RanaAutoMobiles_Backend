@@ -1,29 +1,22 @@
 import jwt, { Jwt, JwtPayload, SignOptions } from 'jsonwebtoken';
 import fs from 'fs';
 import path from 'path';
+import { envConstant } from '../constant/env.constant';
 
 class JwtUtils {
-  private static privateKey: string = fs.readFileSync(
-    path.join(__dirname, '../key/private.pem'),
-    'utf8'
-  );
-
-  private static publicKey: string = fs.readFileSync(
-    path.join(__dirname, '../key/public.pem'),
-    'utf8'
-  );
-
+  
+ 
   static generateToken(payload: object, expiresIn: string): string {
     const signOptions: SignOptions = {
       algorithm: 'RS256',
       expiresIn: expiresIn as any, // Default expiration time
     };
 
-    return jwt.sign(payload, this.privateKey, signOptions);
+    return jwt.sign(payload, envConstant.privateKey as any, signOptions);
   }
 
   static verifyToken(token: string): JwtPayload {
-    return jwt.verify(token, this.publicKey, {
+    return jwt.verify(token, envConstant.publicKey as any, {
       algorithms: ['RS256'],
     }) as JwtPayload;
   }

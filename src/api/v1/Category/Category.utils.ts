@@ -4,14 +4,14 @@ import { ICategory } from './Category.type';
 import { IProduct } from '../Product/Product.type';
 
 class CategoryUtils {
-
   async findByName(name: string): Promise<ICategory | null> {
     return await CategoryModel.findOne({ name });
   }
 
-
   async findProductsByCategoryName(categoryName: string): Promise<IProduct[]> {
-    const category = await CategoryModel.findOne({ name: categoryName }).populate('Products');
+    const category = await CategoryModel.findOne({
+      name: categoryName,
+    }).populate('Products');
     if (!category) {
       throw new Error(`Category with name "${categoryName}" not found`);
     }
@@ -26,8 +26,6 @@ class CategoryUtils {
     }
     return categories;
   }
-
- 
 }
 
 export default new CategoryUtils();

@@ -9,6 +9,7 @@ import AuthUtils from './Auth.utils';
 import { ZodError } from 'zod';
 import roleUtils from '../role/role.utils';
 import roleConstant from '../role/role.constant';
+import { envConstant } from '../../../constant/env.constant';
 
 class AuthController {
   private static GenToken(userId: string, roleId: string): string {
@@ -68,6 +69,7 @@ class AuthController {
 
       AuthController.setTokenCookie(res, token);
 
+
       SendResponse.success(
         res,
         StatusCode_Constant.OK,
@@ -78,7 +80,6 @@ class AuthController {
             name: findUser.name,
             email: findUser.email,
             role: findRole.name,
-            token: token,
           },
         }
       );

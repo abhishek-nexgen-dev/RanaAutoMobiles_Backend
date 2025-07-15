@@ -4,8 +4,6 @@ import path from 'path';
 import { envConstant } from '../constant/env.constant';
 
 class JwtUtils {
-  
- 
   static generateToken(payload: object, expiresIn: string): string {
     const signOptions: SignOptions = {
       algorithm: 'RS256',

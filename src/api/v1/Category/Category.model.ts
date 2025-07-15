@@ -20,11 +20,12 @@ const CategorySchema: Schema = new Schema(
       required: [true, 'Category image is required'],
     },
 
-
-    Products:[{
-     type: Schema.Types.ObjectId,
-      ref: 'Product',
-    }],
+    Products: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Product',
+      },
+    ],
 
     isActive: {
       type: Boolean,
@@ -41,6 +42,5 @@ const CategorySchema: Schema = new Schema(
 );
 
 CategorySchema.index.name;
-
 
 export default mongoose.model<ICategory>('Category', CategorySchema);

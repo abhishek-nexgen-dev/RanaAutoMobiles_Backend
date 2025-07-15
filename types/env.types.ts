@@ -9,6 +9,7 @@ export interface EnvTypes {
     privateKey?: string;
     BUNNY_BUCKET_Name: string,
     BUNNY_PASSWORD: string,
+    is_Development: boolean;
     BUNNY_REGION: string
 
 }

@@ -5,11 +5,10 @@ import FileUpload from '../../../utils/FileUpload';
 
 const router = Router();
 
-
 router.post(
   '/v1/admin/Category/Create',
   AuthMiddleWare.validateAdmin,
-  FileUpload.Multer_Upload.single('categoryImage'), 
+  FileUpload.Multer_Upload.single('categoryImage'),
   CategoryController.createCategory
 );
 

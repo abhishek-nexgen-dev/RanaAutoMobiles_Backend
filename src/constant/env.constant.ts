@@ -14,6 +14,5 @@ export let envConstant: EnvTypes = {
   BUNNY_BUCKET_Name: process.env.BUNNY_BUCKET_Name || '',
   BUNNY_PASSWORD: process.env.BUNNY_PASSWORD || '',
   BUNNY_REGION: process.env.BUNNY_REGION || '',
+  is_Development: process.env.is_Development === 'true' || false,
 };
-
-

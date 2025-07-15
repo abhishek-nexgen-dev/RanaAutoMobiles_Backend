@@ -3,29 +3,26 @@ import multer from 'multer';
 import path from 'path';
 import axios from 'axios';
 
-
 class File_Upload {
   Multer_Upload = multer({
     storage: multer.memoryStorage(), // Store files in memory
   });
-
 
   async uploadFileInBunny(file: Express.Multer.File): Promise<string> {
     try {
       // Generate a unique file name
       const randomBytes = new Uint8Array(16); // Generate 16 random bytes
       crypto.getRandomValues(randomBytes);
-      const uniqueFileName = `${Array.from(randomBytes).map(byte => byte.toString(16).padStart(2, '0')).join('')}-${file.originalname}`;
+      const uniqueFileName = `${Array.from(randomBytes)
+        .map((byte) => byte.toString(16).padStart(2, '0'))
+        .join('')}-${file.originalname}`;
 
       // Construct the BunnyCDN upload URL
       const url = `https://${envConstant.BUNNY_REGION ? `${envConstant.BUNNY_REGION}.` : ''}storage.bunnycdn.com/${envConstant.BUNNY_BUCKET_Name}/${uniqueFileName}`;
 
-
-
       console.log();
-      
 
-    //   // Perform the file upload using axios
+      //   // Perform the file upload using axios
       const response = await axios.put(url, file.buffer, {
         headers: {
           AccessKey: envConstant.BUNNY_PASSWORD,
@@ -33,7 +30,6 @@ class File_Upload {
           accept: 'application/json',
         },
       });
-
 
       return `https://ranaautomobiles.b-cdn.net/${path.basename(url)}`;
 
@@ -51,7 +47,6 @@ class File_Upload {
     }
   }
 
- 
   async deleteFileFromBunny(fileName: string): Promise<void> {
     try {
       // Construct the BunnyCDN delete URL

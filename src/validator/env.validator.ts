@@ -10,6 +10,7 @@ export const envSchema = Joi.object({
   BUNNY_BUCKET_Name: Joi.string().required(),
   BUNNY_PASSWORD: Joi.string().required(),
   BUNNY_REGION: Joi.string().required(),
+  is_Development: Joi.boolean().default(false),
   //   NODE_ENV: Joi.string()
   //     .valid("development", "production", "test")
   //     .default("development"),
@@ -22,8 +23,6 @@ export function validateEnv(env: NodeJS.ProcessEnv) {
   }
   return value;
 }
-
-
 
 // password: envConstant.BUNNY_secretAccessKey,         // Your Bunny storage zone password
 // region: envConstant.BUNNY_REGION || 'sg',   // 'sg' for Singapore, 'de' for Germany, etc.

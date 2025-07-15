@@ -9,28 +9,22 @@ import { Category_Constant } from './Category.consant';
 import CategoryUtils from './Category.utils';
 
 class Category_Controller {
- 
   async createCategory(req: Request, res: Response): Promise<void> {
     try {
-   
       const { name, description } = Category_Validator.parse(req.body);
 
-      console.log('req.file' , req.file)
+      console.log('req.file', req.file);
 
       if (!req.file) {
         throw new Error('Category image is required');
-
-
-    }
-   
+      }
 
       const categoryImage = await FileUpload.uploadFileInBunny(req.file);
       console.log('categoryImage', categoryImage);
-     
+
       if (!categoryImage) {
         throw new Error('Failed to upload category image');
       }
-
 
       const newCategory = await CategoryService.createCategory({
         name,
@@ -61,7 +55,6 @@ class Category_Controller {
       );
     }
   }
-
 
   async find_ProductByName(req: Request, res: Response): Promise<void> {
     try {
@@ -117,7 +110,6 @@ class Category_Controller {
       );
     }
   }
-  
 }
 
 export default new Category_Controller();

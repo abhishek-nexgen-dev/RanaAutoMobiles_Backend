@@ -1,7 +1,5 @@
-import mongoose, { Schema, Document } from "mongoose";
-import { IRole } from "./role.type";
-
-
+import mongoose, { Schema, Document } from 'mongoose';
+import { IRole } from './role.type';
 
 const RoleSchema: Schema = new Schema(
   {
@@ -11,4 +9,4 @@ const RoleSchema: Schema = new Schema(
   { timestamps: true }
 );
 
-export default mongoose.model<IRole>("Role", RoleSchema);
+export default mongoose.model<IRole>('Role', RoleSchema);

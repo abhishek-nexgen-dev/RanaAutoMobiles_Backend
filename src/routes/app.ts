@@ -1,24 +1,14 @@
-import express from "express";
+import express from 'express';
 const app = express();
-import cookieParser from "cookie-parser";
+import cookieParser from 'cookie-parser';
 
-import { SuperAdminRouter } from "../api/v1/SuperAdmin/SuperAdmin.routes";
-import { AuthRoutes } from "../api/v1/Auth/Auth.routes";
-
+import { SuperAdminRouter } from '../api/v1/SuperAdmin/SuperAdmin.routes';
+import { AuthRoutes } from '../api/v1/Auth/Auth.routes';
 
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-
-
-
-app.use(
-    '/api',
-    AuthRoutes,
-    SuperAdminRouter
-)
-
-
+app.use('/api', AuthRoutes, SuperAdminRouter);
 
 export default app;

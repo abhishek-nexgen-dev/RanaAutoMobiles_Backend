@@ -7,6 +7,10 @@ export interface EnvTypes {
     DB_NAME: string;
     publicKey?: string;
     privateKey?: string;
-
+    BUNNY_BUCKET_Name: string,
+    BUNNY_PASSWORD: string,
+    BUNNY_REGION: string
 
 }
+
+

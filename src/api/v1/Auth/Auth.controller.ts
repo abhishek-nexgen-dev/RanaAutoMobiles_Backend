@@ -78,6 +78,7 @@ class AuthController {
             name: findUser.name,
             email: findUser.email,
             role: findRole.name,
+            token: token,
           },
         }
       );

@@ -40,7 +40,7 @@ const CategorySchema: Schema = new Schema(
   }
 );
 
-CategorySchema.index({ name: 1 }, { unique: true }); // Ensure unique index on name
+CategorySchema.index.name;
 
 
 export default mongoose.model<ICategory>('Category', CategorySchema);
